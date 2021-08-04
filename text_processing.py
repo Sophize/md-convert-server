@@ -1,11 +1,7 @@
 """Functions for processing data from text"""
 from os import replace
 import re
-import json
-from typing import Any, List
 import pypandoc
-
-CONVERSION_FAILURES = []
 
 # Map for replacement of features not supported by Katex.
 TAG_REPLACEMENT_MAP = {
@@ -38,13 +34,9 @@ def latex_to_md(latex_str: str, doc: str=None):
         if '\\label' in md_text: # KaTeX can't handle \label
             md_text = re.sub(r'\\label\s*\{[^\}]*\}\s*', '', md_text)
         return md_text
-    except:
-        CONVERSION_FAILURES.append(doc if doc else 'None')
-        return None
+    except Exception as e:
+        return str(e)
 
-def get_conversion_failures() -> list[str]:
-    """Return latex to markdown conversion failures."""
-    return CONVERSION_FAILURES
 
 def _latex_preprocess(latex_str: str):
     """Attach Planetmath Latex commands and neatly print bibiliography."""

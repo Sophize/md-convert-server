@@ -1,3 +1,5 @@
+import os
+
 from flask import Flask, request
 
 from text_processing import latex_to_md
@@ -28,4 +30,5 @@ def test():
     return 'success'
 
 if __name__ == '__main__':
-    app.run(debug=True, port=10001)
+  #app.run(debug=True, port=10001) # Debug server
+  app.run(debug=True, host="0.0.0.0", port=int(os.environ.get("PORT", 8080)))

@@ -2,7 +2,7 @@
 
 Converts latex input to Markdown. 
 
-## Running the server
+## Running the server locally
 
 ```
 python -m venv env
